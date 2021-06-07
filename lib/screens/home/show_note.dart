@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_note/controllers/authController.dart';
-import 'package:flutter_note/controllers/userController.dart';
+import 'package:flutter_note/models/noteModel.dart';
 import 'package:flutter_note/services/database.dart';
 import 'package:get/get.dart';
 
-class AddNotePage extends StatelessWidget {
-  final UserController userController = Get.find<UserController>();
+class ShowNote extends StatelessWidget {
+  final NoteModel noteData;
+  ShowNote({this.noteData});
   final AuthController authController = Get.find<AuthController>();
   final TextEditingController titleController = TextEditingController();
   final TextEditingController bodyController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    titleController.text = noteData.title;
+    bodyController.text = noteData.body;
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -48,7 +52,10 @@ class AddNotePage extends StatelessWidget {
                       icon: Icon(
                         Icons.delete,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Database().delete(authController.user.uid, noteData.id);
+                        Get.back();
+                      },
                     ),
                   ),
                 ],
@@ -59,8 +66,6 @@ class AddNotePage extends StatelessWidget {
               Column(
                 children: [
                   TextFormField(
-                    autofocus: true,
-                    keyboardAppearance: Brightness.light,
                     controller: titleController,
                     decoration: InputDecoration.collapsed(
                       hintText: "Title",
@@ -99,8 +104,8 @@ class AddNotePage extends StatelessWidget {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           if (titleController.text != "" || bodyController.text != "") {
-            Database().addNote(authController.user.uid, titleController.text,
-                bodyController.text);
+            Database().updateNote(authController.user.uid, titleController.text,
+                bodyController.text, noteData.id);
             Get.back();
             titleController.clear();
             bodyController.clear();

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_note/controllers/authController.dart';
+import 'package:flutter_note/controllers/userController.dart';
 import 'package:get/get.dart';
 
-class SignUp extends GetWidget<AuthController> {
+class SignUp extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final AuthController authController = Get.find<AuthController>();
+  final UserController userController = Get.find<UserController>();
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,6 @@ class SignUp extends GetWidget<AuthController> {
               Text(
                 'Note',
                 style: TextStyle(
-                  color: Colors.black,
                   fontSize: 40,
                 ),
               ),
@@ -38,7 +37,7 @@ class SignUp extends GetWidget<AuthController> {
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10)),
                       ),
-                      controller: nameController,
+                      controller: authController.name,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Enter a username!';
@@ -64,7 +63,7 @@ class SignUp extends GetWidget<AuthController> {
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10)),
                       ),
-                      controller: emailController,
+                      controller: authController.email,
                     ),
                     SizedBox(
                       height: 30,
@@ -84,7 +83,7 @@ class SignUp extends GetWidget<AuthController> {
                             borderRadius: BorderRadius.circular(10)),
                       ),
                       obscureText: true,
-                      controller: passwordController,
+                      controller: authController.password,
                     ),
                   ],
                 ),
@@ -96,8 +95,7 @@ class SignUp extends GetWidget<AuthController> {
                 child: Text("Sign Up"),
                 onPressed: () {
                   if (_formKey.currentState.validate()) {
-                    controller.createUser(nameController.text,
-                        emailController.text, passwordController.text);
+                    authController.createUser();
                   }
                 },
               ),

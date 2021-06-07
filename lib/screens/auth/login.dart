@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_note/controllers/authController.dart';
+import 'package:flutter_note/controllers/userController.dart';
 import 'package:flutter_note/screens/auth/signup.dart';
 import 'package:get/get.dart';
 
-class Login extends GetWidget<AuthController> {
+class Login extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final AuthController authController = Get.find<AuthController>();
+  final UserController userController = Get.find<UserController>();
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,6 @@ class Login extends GetWidget<AuthController> {
               Text(
                 'Note',
                 style: TextStyle(
-                  color: Colors.black,
                   fontSize: 40,
                 ),
               ),
@@ -31,7 +31,7 @@ class Login extends GetWidget<AuthController> {
                 child: Column(
                   children: [
                     TextFormField(
-                      controller: emailController,
+                      controller: authController.email,
                       validator: (value) {
                         return RegExp(
                                     r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
@@ -53,7 +53,7 @@ class Login extends GetWidget<AuthController> {
                       height: 30,
                     ),
                     TextFormField(
-                      controller: passwordController,
+                      controller: authController.password,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Enter a password!';
@@ -83,8 +83,7 @@ class Login extends GetWidget<AuthController> {
                 child: Text("Log In"),
                 onPressed: () {
                   if (_formKey.currentState.validate()) {
-                    controller.login(
-                        emailController.text, passwordController.text);
+                    authController.login();
                   }
                 },
               ),
