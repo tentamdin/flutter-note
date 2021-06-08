@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_note/controllers/authController.dart';
-import 'package:flutter_note/controllers/noteController.dart';
 import 'package:flutter_note/controllers/userController.dart';
 import 'package:flutter_note/utils/root.dart';
 import 'package:get/get.dart';
@@ -11,7 +10,6 @@ void main() async {
   await Firebase.initializeApp().then((value) {
     Get.put<AuthController>(AuthController());
     Get.put<UserController>(UserController());
-    Get.put<NoteController>(NoteController());
   });
   runApp(MyApp());
 }

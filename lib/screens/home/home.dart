@@ -12,10 +12,6 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:intl/intl.dart';
 
 class HomePage extends GetWidget<AuthController> {
-  final UserController userController = Get.find<UserController>();
-  final AuthController authController = Get.find<AuthController>();
-  final NoteController noteController = Get.find<NoteController>();
-
   final lightColors = [
     Colors.amber.shade300,
     Colors.lightGreen.shade300,
@@ -64,8 +60,8 @@ class HomePage extends GetWidget<AuthController> {
                   height: 10,
                 ),
                 GetX<NoteController>(
-                    init: noteController,
-                    builder: (noteController) {
+                    init: Get.put<NoteController>(NoteController()),
+                    builder: (NoteController noteController) {
                       if (noteController != null &&
                           noteController.notes != null) {
                         return Expanded(
@@ -76,7 +72,7 @@ class HomePage extends GetWidget<AuthController> {
                                 StaggeredTile.fit(2),
                             crossAxisCount: 4,
                             mainAxisSpacing: 4,
-                            crossAxisSpacing: 4,
+                            crossAxisSpacing: 5,
                             itemBuilder: (context, index) {
                               var formattedDate = DateFormat.yMMMd().format(
                                   noteController.notes[index].creationDate
@@ -86,6 +82,7 @@ class HomePage extends GetWidget<AuthController> {
                               return GestureDetector(
                                 onTap: () {
                                   Get.to(() => ShowNote(
+                                      index: index,
                                       noteData: noteController.notes[index]));
                                 },
                                 child: Card(

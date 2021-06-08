@@ -17,83 +17,92 @@ class AddNotePage extends StatelessWidget {
           padding: EdgeInsets.all(
             12.0,
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade800,
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.arrow_back_ios_outlined,
-                      ),
-                      onPressed: () {
-                        Get.back();
-                      },
-                    ),
+          child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade800,
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade800,
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.circular(10),
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.arrow_back_ios_outlined,
                     ),
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.delete,
-                      ),
-                      onPressed: () {},
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Column(
-                children: [
-                  TextFormField(
-                    autofocus: true,
-                    keyboardAppearance: Brightness.light,
-                    controller: titleController,
-                    decoration: InputDecoration.collapsed(
-                      hintText: "Title",
-                    ),
-                    style: TextStyle(
-                      fontSize: 26.0,
-                      fontWeight: FontWeight.w500,
-                    ),
-                    onChanged: (_val) {
-                      // title = _val;
+                    onPressed: () {
+                      Get.back();
                     },
                   ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  TextFormField(
-                    controller: bodyController,
-                    keyboardType: TextInputType.multiline,
-                    maxLines: null,
-                    decoration: InputDecoration.collapsed(
-                      hintText: "Type something...",
+                ),
+                // Container(
+                //   decoration: BoxDecoration(
+                //     color: Colors.grey.shade800,
+                //     shape: BoxShape.rectangle,
+                //     borderRadius: BorderRadius.circular(10),
+                //   ),
+                //   child: IconButton(
+                //     icon: Icon(
+                //       Icons.delete,
+                //     ),
+                //     onPressed: () {},
+                //   ),
+                // ),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            LayoutBuilder(
+              builder:
+                  (BuildContext context, BoxConstraints viewportConstraints) {
+                return SingleChildScrollView(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxHeight: viewportConstraints.maxHeight,
                     ),
-                    style: TextStyle(
-                      fontSize: 20.0,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        TextFormField(
+                          autofocus: true,
+                          controller: titleController,
+                          decoration: InputDecoration.collapsed(
+                            hintText: "Title",
+                          ),
+                          style: TextStyle(
+                            fontSize: 26.0,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          onChanged: (_val) {
+                            // title = _val;
+                          },
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        TextFormField(
+                          controller: bodyController,
+                          keyboardType: TextInputType.multiline,
+                          maxLines: null,
+                          decoration: InputDecoration.collapsed(
+                            hintText: "Type something...",
+                          ),
+                          style: TextStyle(
+                            fontSize: 20.0,
+                          ),
+                          onChanged: (_val) {
+                            // des = _val;
+                          },
+                        ),
+                      ],
                     ),
-                    onChanged: (_val) {
-                      // des = _val;
-                    },
                   ),
-                ],
-              ),
-            ],
-          ),
+                );
+              },
+            )
+          ]),
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
