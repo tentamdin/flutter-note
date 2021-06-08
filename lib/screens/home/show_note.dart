@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_note/controllers/authController.dart';
+import 'package:flutter_note/controllers/noteController.dart';
 import 'package:flutter_note/models/noteModel.dart';
 import 'package:flutter_note/services/database.dart';
 import 'package:get/get.dart';
 
 class ShowNote extends StatelessWidget {
   final NoteModel noteData;
-  ShowNote({this.noteData});
+  final int index;
+  ShowNote({this.noteData, this.index});
   final AuthController authController = Get.find<AuthController>();
+  final NoteController noteController = Get.find<NoteController>();
   final TextEditingController titleController = TextEditingController();
   final TextEditingController bodyController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    titleController.text = noteData.title;
-    bodyController.text = noteData.body;
+    String title = noteController.notes[index].title;
+    String body = noteController.notes[index].body;
+    titleController.text = noteController.notes[index].title;
+    bodyController.text = noteController.notes[index].body;
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -66,7 +71,8 @@ class ShowNote extends StatelessWidget {
               Column(
                 children: [
                   TextFormField(
-                    controller: titleController,
+                    // controller: titleController,
+                    initialValue: noteController.notes[index].title,
                     decoration: InputDecoration.collapsed(
                       hintText: "Title",
                     ),
@@ -75,14 +81,15 @@ class ShowNote extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                     onChanged: (_val) {
-                      // title = _val;
+                      title = _val;
                     },
                   ),
                   SizedBox(
                     height: 20,
                   ),
                   TextFormField(
-                    controller: bodyController,
+                    initialValue: noteController.notes[index].body,
+                    // controller: bodyController,
                     keyboardType: TextInputType.multiline,
                     maxLines: null,
                     decoration: InputDecoration.collapsed(
@@ -92,7 +99,7 @@ class ShowNote extends StatelessWidget {
                       fontSize: 20.0,
                     ),
                     onChanged: (_val) {
-                      // des = _val;
+                      body = _val;
                     },
                   ),
                 ],
@@ -101,19 +108,23 @@ class ShowNote extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          if (titleController.text != "" || bodyController.text != "") {
-            Database().updateNote(authController.user.uid, titleController.text,
-                bodyController.text, noteData.id);
-            Get.back();
-            titleController.clear();
-            bodyController.clear();
-          }
-        },
-        label: Text("Save"),
-        icon: Icon(Icons.save),
-      ),
+      floatingActionButton: Obx(() => title ==
+                  noteController.notes[index].title &&
+              body == noteController.notes[index].body
+          ? FloatingActionButton.extended(
+              onPressed: () {
+                if (titleController.text != "" || bodyController.text != "") {
+                  Database().updateNote(
+                      authController.user.uid, title, body, noteData.id);
+                  Get.back();
+                  titleController.clear();
+                  bodyController.clear();
+                }
+              },
+              label: Text("Save"),
+              icon: Icon(Icons.save),
+            )
+          : Container()),
     );
   }
 }

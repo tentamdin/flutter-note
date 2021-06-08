@@ -93,7 +93,7 @@ class Login extends StatelessWidget {
               OutlinedButton(
                 child: Text("Sign Up"),
                 onPressed: () {
-                  Get.to(SignUp());
+                  Get.to(() => SignUp());
                 },
               )
             ],
