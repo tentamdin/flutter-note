@@ -24,7 +24,7 @@ class ShowNote extends StatelessWidget {
       body: SafeArea(
         child: Container(
           padding: EdgeInsets.all(
-            12.0,
+            16.0,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -68,41 +68,46 @@ class ShowNote extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              Column(
-                children: [
-                  TextFormField(
-                    // controller: titleController,
-                    initialValue: noteController.notes[index].title,
-                    decoration: InputDecoration.collapsed(
-                      hintText: "Title",
-                    ),
-                    style: TextStyle(
-                      fontSize: 26.0,
-                      fontWeight: FontWeight.w500,
-                    ),
-                    onChanged: (_val) {
-                      title = _val;
-                    },
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        // controller: titleController,
+                        initialValue: noteController.notes[index].title,
+                        decoration: InputDecoration.collapsed(
+                          hintText: "Title",
+                        ),
+                        style: TextStyle(
+                          fontSize: 26.0,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        onChanged: (_val) {
+                          title = _val;
+                        },
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        autofocus: true,
+                        initialValue: noteController.notes[index].body,
+                        // controller: bodyController,
+                        keyboardType: TextInputType.multiline,
+                        maxLines: null,
+                        decoration: InputDecoration.collapsed(
+                          hintText: "Type something...",
+                        ),
+                        style: TextStyle(
+                          fontSize: 20.0,
+                        ),
+                        onChanged: (_val) {
+                          body = _val;
+                        },
+                      ),
+                    ],
                   ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  TextFormField(
-                    initialValue: noteController.notes[index].body,
-                    // controller: bodyController,
-                    keyboardType: TextInputType.multiline,
-                    maxLines: null,
-                    decoration: InputDecoration.collapsed(
-                      hintText: "Type something...",
-                    ),
-                    style: TextStyle(
-                      fontSize: 20.0,
-                    ),
-                    onChanged: (_val) {
-                      body = _val;
-                    },
-                  ),
-                ],
+                ),
               ),
             ],
           ),

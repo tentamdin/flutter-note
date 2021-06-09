@@ -11,13 +11,15 @@ class AddNotePage extends StatelessWidget {
   final TextEditingController bodyController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
         child: Container(
+          height: size.height,
           padding: EdgeInsets.all(
-            12.0,
+            16.0,
           ),
-          child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+          child: Column(children: <Widget>[
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -54,54 +56,50 @@ class AddNotePage extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            LayoutBuilder(
-              builder:
-                  (BuildContext context, BoxConstraints viewportConstraints) {
-                return SingleChildScrollView(
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxHeight: viewportConstraints.maxHeight,
+            Expanded(
+              child: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
+                child: Column(
+                  children: [
+                    TextFormField(
+                      maxLines: null,
+                      autofocus: true,
+                      controller: titleController,
+                      keyboardType: TextInputType.multiline,
+                      textCapitalization: TextCapitalization.sentences,
+                      decoration: InputDecoration.collapsed(
+                        hintText: "Title",
+                      ),
+                      style: TextStyle(
+                        fontSize: 26.0,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      onChanged: (_val) {
+                        // title = _val;
+                      },
                     ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        TextFormField(
-                          autofocus: true,
-                          controller: titleController,
-                          decoration: InputDecoration.collapsed(
-                            hintText: "Title",
-                          ),
-                          style: TextStyle(
-                            fontSize: 26.0,
-                            fontWeight: FontWeight.w500,
-                          ),
-                          onChanged: (_val) {
-                            // title = _val;
-                          },
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
-                          controller: bodyController,
-                          keyboardType: TextInputType.multiline,
-                          maxLines: null,
-                          decoration: InputDecoration.collapsed(
-                            hintText: "Type something...",
-                          ),
-                          style: TextStyle(
-                            fontSize: 20.0,
-                          ),
-                          onChanged: (_val) {
-                            // des = _val;
-                          },
-                        ),
-                      ],
+                    SizedBox(
+                      height: 20,
                     ),
-                  ),
-                );
-              },
-            )
+                    TextFormField(
+                      controller: bodyController,
+                      keyboardType: TextInputType.multiline,
+                      maxLines: null,
+                      textCapitalization: TextCapitalization.sentences,
+                      decoration: InputDecoration.collapsed(
+                        hintText: "Type something...",
+                      ),
+                      style: TextStyle(
+                        fontSize: 20.0,
+                      ),
+                      onChanged: (_val) {
+                        // des = _val;
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ]),
         ),
       ),

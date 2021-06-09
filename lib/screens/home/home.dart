@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_note/controllers/authController.dart';
 import 'package:flutter_note/controllers/noteController.dart';
-import 'package:flutter_note/controllers/userController.dart';
 import 'package:flutter_note/screens/home/add_note.dart';
 import 'package:flutter_note/screens/home/show_note.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -29,7 +28,7 @@ class HomePage extends GetWidget<AuthController> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
             child: Column(
               children: [
                 Row(
@@ -66,13 +65,12 @@ class HomePage extends GetWidget<AuthController> {
                           noteController.notes != null) {
                         return Expanded(
                           child: StaggeredGridView.countBuilder(
-                            // padding: EdgeInsets.all(8),
                             itemCount: noteController.notes.length,
                             staggeredTileBuilder: (index) =>
                                 StaggeredTile.fit(2),
                             crossAxisCount: 4,
-                            mainAxisSpacing: 4,
-                            crossAxisSpacing: 5,
+                            mainAxisSpacing: 6,
+                            crossAxisSpacing: 12,
                             itemBuilder: (context, index) {
                               var formattedDate = DateFormat.yMMMd().format(
                                   noteController.notes[index].creationDate
@@ -85,11 +83,22 @@ class HomePage extends GetWidget<AuthController> {
                                       index: index,
                                       noteData: noteController.notes[index]));
                                 },
-                                child: Card(
-                                  color: bg,
+                                child: Container(
+                                  padding: EdgeInsets.only(
+                                    top: 5,
+                                    bottom: 10,
+                                    left: 10,
+                                    right: 10,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: bg,
+                                    shape: BoxShape.rectangle,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
                                   child: Column(
                                     children: [
                                       ListTile(
+                                        contentPadding: EdgeInsets.all(8),
                                         title: Text(
                                           noteController.notes[index].title,
                                           style: TextStyle(
