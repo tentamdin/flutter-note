@@ -20,9 +20,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Note',
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: Colors.grey.shade900,
-      ),
+      theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
       themeMode: ThemeMode.system,
       home: Root(),
