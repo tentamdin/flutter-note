@@ -75,6 +75,7 @@ class ShowNote extends StatelessWidget {
                       TextFormField(
                         // controller: titleController,
                         initialValue: noteController.notes[index].title,
+                        maxLines: null,
                         decoration: InputDecoration.collapsed(
                           hintText: "Title",
                         ),

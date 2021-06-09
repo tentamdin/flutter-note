@@ -5,6 +5,7 @@ import 'package:flutter_note/controllers/authController.dart';
 import 'package:flutter_note/controllers/noteController.dart';
 import 'package:flutter_note/screens/home/add_note.dart';
 import 'package:flutter_note/screens/home/show_note.dart';
+import 'package:flutter_note/screens/settings/setting.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
@@ -25,38 +26,58 @@ class HomePage extends GetWidget<AuthController> {
 
   @override
   Widget build(BuildContext context) {
+    int axisCount = 2;
     return Scaffold(
       body: SafeArea(
         child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+            padding: EdgeInsets.symmetric(
+              vertical: 10,
+              horizontal: 16,
+            ),
             child: Column(
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Notes",
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Colors.grey.shade800,
+                            shape: BoxShape.rectangle,
+                            borderRadius: BorderRadius.circular(10)),
+                        child: IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            axisCount == 2 ? Icons.list : Icons.grid_on,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        "Notes",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 25,
-                        )),
-                    Container(
-                      decoration: BoxDecoration(
-                          color: Colors.grey.shade800,
-                          shape: BoxShape.rectangle,
-                          borderRadius: BorderRadius.circular(10)),
-                      child: IconButton(
-                        onPressed: () {
-                          controller.singout();
-                        },
-                        icon: Icon(
-                          Icons.settings,
                         ),
                       ),
-                    ),
-                  ],
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Colors.grey.shade800,
+                            shape: BoxShape.rectangle,
+                            borderRadius: BorderRadius.circular(10)),
+                        child: IconButton(
+                          onPressed: () {
+                            Get.to(() => Setting());
+                          },
+                          icon: Icon(
+                            Icons.settings,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                 GetX<NoteController>(
                     init: Get.put<NoteController>(NoteController()),
@@ -65,11 +86,12 @@ class HomePage extends GetWidget<AuthController> {
                           noteController.notes != null) {
                         return Expanded(
                           child: StaggeredGridView.countBuilder(
+                            physics: BouncingScrollPhysics(),
                             itemCount: noteController.notes.length,
                             staggeredTileBuilder: (index) =>
-                                StaggeredTile.fit(2),
+                                StaggeredTile.fit(axisCount),
                             crossAxisCount: 4,
-                            mainAxisSpacing: 6,
+                            mainAxisSpacing: 12,
                             crossAxisSpacing: 12,
                             itemBuilder: (context, index) {
                               var formattedDate = DateFormat.yMMMd().format(
@@ -84,8 +106,9 @@ class HomePage extends GetWidget<AuthController> {
                                       noteData: noteController.notes[index]));
                                 },
                                 child: Container(
-                                  padding: EdgeInsets.only(
-                                    top: 5,
+                                  padding:
+                                      // EdgeInsets.all(8),
+                                      EdgeInsets.only(
                                     bottom: 10,
                                     left: 10,
                                     right: 10,
@@ -99,27 +122,42 @@ class HomePage extends GetWidget<AuthController> {
                                     children: [
                                       ListTile(
                                         contentPadding: EdgeInsets.all(8),
-                                        title: Text(
-                                          noteController.notes[index].title,
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w500,
+                                        title: Padding(
+                                          padding: EdgeInsets.symmetric(
+                                            vertical: 8,
+                                          ),
+                                          child: Text(
+                                            noteController.notes[index].title,
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w500,
+                                            ),
                                           ),
                                         ),
                                         subtitle: Text(
                                           noteController.notes[index].body,
+                                          maxLines: 10,
+                                          overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                             fontSize: 14,
                                             color: Colors.black,
                                           ),
                                         ),
                                       ),
-                                      Text(
-                                        formattedDate,
-                                        style: TextStyle(
-                                          color: Colors.grey.shade900,
-                                        ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          Text(
+                                            formattedDate,
+                                            style: TextStyle(
+                                              color: Colors.grey.shade900,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
@@ -127,47 +165,6 @@ class HomePage extends GetWidget<AuthController> {
                               );
                             },
                           ),
-
-                          // ListView.builder(
-                          //     itemCount: noteController.notes.length,
-                          //     itemBuilder: (context, index) {
-                          //       var formattedDate = DateFormat.yMMMd().format(
-                          //           noteController.notes[index].creationDate
-                          //               .toDate());
-                          //       print("Timestamp  ::$formattedDate");
-                          //       return Card(
-                          //         color: Colors.teal,
-                          //         child: Column(
-                          //           children: [
-                          //             ListTile(
-                          //               title: Text(
-                          //                 noteController.notes[index].title,
-                          //                 style: TextStyle(
-                          //                   color: Colors.black,
-                          //                   fontSize: 18,
-                          //                   fontWeight: FontWeight.w500,
-                          //                 ),
-                          //               ),
-                          //               subtitle: Text(
-                          //                 noteController.notes[index].body,
-                          //                 style: TextStyle(
-                          //                   fontSize: 14,
-                          //                   color: Colors.black,
-                          //                 ),
-                          //               ),
-                          //             ),
-                          //             Text(
-                          //               DateFormat.yMMMd().format(noteController
-                          //                   .notes[index].creationDate
-                          //                   .toDate()),
-                          //               style: TextStyle(
-                          //                 color: Colors.grey.shade900,
-                          //               ),
-                          //             ),
-                          //           ],
-                          //         ),
-                          //       ),
-                          //     }),
                         );
                       } else {
                         return Text("Loading...");
