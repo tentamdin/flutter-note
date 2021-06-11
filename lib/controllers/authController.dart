@@ -13,6 +13,7 @@ class AuthController extends GetxController {
   TextEditingController password = TextEditingController();
   String usersCollection = "users";
   Rx<UserModel> userModel = UserModel().obs;
+  Rx<int> axisCount = 2.obs;
 
   User get user => _firebaseUser.value;
 
@@ -69,7 +70,7 @@ class AuthController extends GetxController {
     }
   }
 
-  void singout() async {
+  void signout() async {
     try {
       await _auth.signOut();
       Get.find<UserController>().clear();
