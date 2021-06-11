@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_note/controllers/authController.dart';
-import 'package:flutter_note/screens/settings/account.dart';
-import 'package:flutter_note/screens/settings/dark_mode.dart';
-import 'package:flutter_note/screens/settings/widgets/list_tile.dart';
 import 'package:get/get.dart';
 
-class Setting extends StatelessWidget {
-  final AuthController authController = Get.find<AuthController>();
+class Account extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +35,7 @@ class Setting extends StatelessWidget {
                       width: MediaQuery.of(context).size.width / 4,
                     ),
                     Text(
-                      "Settings",
+                      "Account",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 25,
@@ -48,25 +43,6 @@ class Setting extends StatelessWidget {
                     ),
                   ],
                 ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              ListTileSetting(
-                onTap: () {
-                  Get.to(() => Account());
-                },
-                title: "Account",
-                iconData: Icons.person,
-                subtitle: null,
-              ),
-              ListTileSetting(
-                onTap: () {
-                  Get.to(() => DarkMode());
-                },
-                title: "Dark Mode",
-                iconData: Icons.nights_stay,
-                subtitle: null,
               ),
             ],
           ),
