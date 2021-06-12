@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_note/controllers/authController.dart';
 import 'package:flutter_note/controllers/userController.dart';
 import 'package:flutter_note/utils/root.dart';
+import 'package:flutter_note/utils/theme.dart';
 import 'package:get/get.dart';
 
 void main() async {
@@ -20,8 +21,8 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Note',
-      theme: ThemeData.light(),
-      darkTheme: ThemeData.dark(),
+      theme: Themes().lightTheme,
+      darkTheme: Themes().dartTheme,
       themeMode: ThemeMode.system,
       home: Root(),
     );

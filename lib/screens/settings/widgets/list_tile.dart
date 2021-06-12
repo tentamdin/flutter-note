@@ -14,13 +14,17 @@ class ListTileSetting extends StatelessWidget {
       children: [
         ListTile(
           contentPadding: EdgeInsets.symmetric(
-            horizontal: 0,
+            horizontal: 12,
           ),
           onTap: onTap,
-          leading: Icon(iconData),
+          leading: Icon(
+            iconData,
+            color: Theme.of(context).iconTheme.color,
+          ),
           title: Text(title),
           trailing: Icon(
             Icons.arrow_forward_ios,
+            color: Theme.of(context).iconTheme.color,
           ),
           subtitle: subtitle,
         ),

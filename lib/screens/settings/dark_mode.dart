@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_note/screens/settings/widgets/list_tile.dart';
+import 'package:flutter_note/screens/widgets/custom_icon_btn.dart';
 import 'package:get/get.dart';
 
 class DarkMode extends StatelessWidget {
@@ -18,28 +19,23 @@ class DarkMode extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          color: Colors.grey.shade800,
-                          shape: BoxShape.rectangle,
-                          borderRadius: BorderRadius.circular(10)),
-                      child: IconButton(
-                        onPressed: () {
-                          Get.back();
-                        },
-                        icon: Icon(
-                          Icons.arrow_back_ios,
-                        ),
+                    CustomIconBtn(
+                      icon: Icon(
+                        Icons.arrow_back_ios,
                       ),
+                      color: Theme.of(context).backgroundColor,
+                      onPressed: () {
+                        Get.back();
+                      },
                     ),
                     SizedBox(
-                      width: MediaQuery.of(context).size.width / 4,
+                      width: MediaQuery.of(context).size.width / 5,
                     ),
                     Text(
-                      "Settings",
+                      "Appearnace",
                       style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 25,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
@@ -49,21 +45,27 @@ class DarkMode extends StatelessWidget {
                 height: 20,
               ),
               ListTileSetting(
-                  onTap: () {},
+                  onTap: () {
+                    Get.changeThemeMode(ThemeMode.system);
+                  },
                   title: "Use device setting",
                   iconData: Icons.settings_brightness_outlined,
                   subtitle: Text(
                     "Auttomatically swtich between Light and Dark themes when your system does",
                   )),
               ListTileSetting(
-                onTap: () {},
+                onTap: () {
+                  Get.changeThemeMode(ThemeMode.light);
+                },
                 title: "Light Mode",
                 iconData: Icons.brightness_5,
                 subtitle: null,
               ),
               ListTileSetting(
                 iconData: Icons.brightness_4_outlined,
-                onTap: () {},
+                onTap: () {
+                  Get.changeThemeMode(ThemeMode.dark);
+                },
                 title: "Dark Mode",
                 subtitle: null,
               ),

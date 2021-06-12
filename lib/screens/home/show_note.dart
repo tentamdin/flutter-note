@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_note/controllers/authController.dart';
 import 'package:flutter_note/controllers/noteController.dart';
 import 'package:flutter_note/models/noteModel.dart';
+import 'package:flutter_note/screens/widgets/custom_icon_btn.dart';
 import 'package:flutter_note/services/database.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class ShowNote extends StatelessWidget {
   final NoteModel noteData;
@@ -20,6 +22,10 @@ class ShowNote extends StatelessWidget {
     String body = noteController.notes[index].body;
     titleController.text = noteController.notes[index].title;
     bodyController.text = noteController.notes[index].body;
+    var formattedDate = DateFormat.yMMMd()
+        .format(noteController.notes[index].creationDate.toDate());
+    var time = DateFormat.jm()
+        .format(noteController.notes[index].creationDate.toDate());
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -32,35 +38,23 @@ class ShowNote extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade800,
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.arrow_back_ios_outlined,
-                      ),
-                      onPressed: () {
-                        Get.back();
-                      },
+                  CustomIconBtn(
+                    color: Theme.of(context).backgroundColor,
+                    onPressed: () {
+                      Get.back();
+                    },
+                    icon: Icon(
+                      Icons.arrow_back_ios_outlined,
                     ),
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade800,
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.delete,
-                      ),
-                      onPressed: () {
-                        Database().delete(authController.user.uid, noteData.id);
-                        Get.back();
-                      },
+                  CustomIconBtn(
+                    color: Theme.of(context).backgroundColor,
+                    onPressed: () {
+                      Database().delete(authController.user.uid, noteData.id);
+                      Get.back();
+                    },
+                    icon: Icon(
+                      Icons.delete,
                     ),
                   ),
                 ],
@@ -72,6 +66,10 @@ class ShowNote extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
+                      Text("$formattedDate at $time"),
+                      SizedBox(
+                        height: 10,
+                      ),
                       TextFormField(
                         // controller: titleController,
                         initialValue: noteController.notes[index].title,

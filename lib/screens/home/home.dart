@@ -4,6 +4,7 @@ import 'package:flutter_note/controllers/noteController.dart';
 import 'package:flutter_note/screens/home/add_note.dart';
 import 'package:flutter_note/screens/home/note_list.dart';
 import 'package:flutter_note/screens/settings/setting.dart';
+import 'package:flutter_note/screens/widgets/custom_icon_btn.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
@@ -25,44 +26,30 @@ class HomePage extends GetWidget<AuthController> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          decoration: BoxDecoration(
-                              color: Colors.grey.shade800,
-                              shape: BoxShape.rectangle,
-                              borderRadius: BorderRadius.circular(10)),
-                          child:
-                              // Obx(
-                              //   () =>
-                              IconButton(
-                            onPressed: () {
-                              authController.axisCount.value =
-                                  authController.axisCount.value == 2 ? 4 : 2;
-                            },
-                            icon: Icon(authController.axisCount.value == 2
-                                ? Icons.list
-                                : Icons.grid_on),
-                          ),
-                          // )
+                        CustomIconBtn(
+                          color: Theme.of(context).backgroundColor,
+                          onPressed: () {
+                            authController.axisCount.value =
+                                authController.axisCount.value == 2 ? 4 : 2;
+                          },
+                          icon: Icon(authController.axisCount.value == 2
+                              ? Icons.list
+                              : Icons.grid_on),
                         ),
                         Text(
                           "Notes",
                           style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 25,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                        Container(
-                          decoration: BoxDecoration(
-                              color: Colors.grey.shade800,
-                              shape: BoxShape.rectangle,
-                              borderRadius: BorderRadius.circular(10)),
-                          child: IconButton(
-                            onPressed: () {
-                              Get.to(() => Setting());
-                            },
-                            icon: Icon(
-                              Icons.settings,
-                            ),
+                        CustomIconBtn(
+                          color: Theme.of(context).backgroundColor,
+                          onPressed: () {
+                            Get.to(() => Setting());
+                          },
+                          icon: Icon(
+                            Icons.settings,
                           ),
                         ),
                       ],
