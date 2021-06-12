@@ -27,7 +27,6 @@ class NoteList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: StaggeredGridView.countBuilder(
-        physics: BouncingScrollPhysics(),
         itemCount: noteController.notes.length,
         staggeredTileBuilder: (index) =>
             StaggeredTile.fit(authController.axisCount.value),
@@ -45,9 +44,7 @@ class NoteList extends StatelessWidget {
                   index: index, noteData: noteController.notes[index]));
             },
             child: Container(
-              padding:
-                  // EdgeInsets.all(8),
-                  EdgeInsets.only(
+              padding: EdgeInsets.only(
                 bottom: 10,
                 left: 10,
                 right: 10,
@@ -60,7 +57,12 @@ class NoteList extends StatelessWidget {
               child: Column(
                 children: [
                   ListTile(
-                    contentPadding: EdgeInsets.all(8),
+                    contentPadding: EdgeInsets.only(
+                      top: 5,
+                      right: 8,
+                      left: 8,
+                      bottom: 0,
+                    ),
                     title: Padding(
                       padding: EdgeInsets.symmetric(
                         vertical: 8,
@@ -92,7 +94,7 @@ class NoteList extends StatelessWidget {
                       Text(
                         formattedDate,
                         style: TextStyle(
-                          color: Colors.grey.shade900,
+                          color: Colors.black,
                         ),
                       ),
                     ],

@@ -3,6 +3,7 @@ import 'package:flutter_note/controllers/authController.dart';
 import 'package:flutter_note/screens/settings/account.dart';
 import 'package:flutter_note/screens/settings/dark_mode.dart';
 import 'package:flutter_note/screens/settings/widgets/list_tile.dart';
+import 'package:flutter_note/screens/widgets/custom_icon_btn.dart';
 import 'package:get/get.dart';
 
 class Setting extends StatelessWidget {
@@ -22,19 +23,14 @@ class Setting extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          color: Colors.grey.shade800,
-                          shape: BoxShape.rectangle,
-                          borderRadius: BorderRadius.circular(10)),
-                      child: IconButton(
-                        onPressed: () {
-                          Get.back();
-                        },
-                        icon: Icon(
-                          Icons.arrow_back_ios,
-                        ),
+                    CustomIconBtn(
+                      icon: Icon(
+                        Icons.arrow_back_ios,
                       ),
+                      color: Theme.of(context).backgroundColor,
+                      onPressed: () {
+                        Get.back();
+                      },
                     ),
                     SizedBox(
                       width: MediaQuery.of(context).size.width / 4,
@@ -42,8 +38,8 @@ class Setting extends StatelessWidget {
                     Text(
                       "Settings",
                       style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 25,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],

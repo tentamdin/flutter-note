@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_note/controllers/authController.dart';
 import 'package:flutter_note/controllers/userController.dart';
+import 'package:flutter_note/screens/widgets/custom_icon_btn.dart';
 import 'package:flutter_note/services/database.dart';
 import 'package:get/get.dart';
 
@@ -21,36 +22,27 @@ class AddNotePage extends StatelessWidget {
           ),
           child: Column(children: <Widget>[
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade800,
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.arrow_back_ios_outlined,
-                    ),
-                    onPressed: () {
-                      Get.back();
-                    },
+                CustomIconBtn(
+                  color: Theme.of(context).backgroundColor,
+                  onPressed: () {
+                    Get.back();
+                  },
+                  icon: Icon(
+                    Icons.arrow_back_ios_outlined,
                   ),
                 ),
-                // Container(
-                //   decoration: BoxDecoration(
-                //     color: Colors.grey.shade800,
-                //     shape: BoxShape.rectangle,
-                //     borderRadius: BorderRadius.circular(10),
-                //   ),
-                //   child: IconButton(
-                //     icon: Icon(
-                //       Icons.delete,
-                //     ),
-                //     onPressed: () {},
-                //   ),
-                // ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width / 4,
+                ),
+                Text(
+                  "Notes",
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ],
             ),
             SizedBox(
@@ -58,7 +50,6 @@ class AddNotePage extends StatelessWidget {
             ),
             Expanded(
               child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
                 child: Column(
                   children: [
                     TextFormField(
