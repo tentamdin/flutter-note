@@ -65,9 +65,6 @@ class AddNotePage extends StatelessWidget {
                         fontSize: 26.0,
                         fontWeight: FontWeight.w500,
                       ),
-                      onChanged: (_val) {
-                        // title = _val;
-                      },
                     ),
                     SizedBox(
                       height: 20,
@@ -83,9 +80,6 @@ class AddNotePage extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 20.0,
                       ),
-                      onChanged: (_val) {
-                        // des = _val;
-                      },
                     ),
                   ],
                 ),
@@ -96,17 +90,48 @@ class AddNotePage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          if (titleController.text != "" || bodyController.text != "") {
-            Database().addNote(authController.user.uid, titleController.text,
-                bodyController.text);
-            Get.back();
-            titleController.clear();
-            bodyController.clear();
-          }
+          titleController.text.length == 0 && bodyController.text.length == 0
+              ? showEmptyTitleDialog(context)
+              : Database().addNote(authController.user.uid,
+                  titleController.text, bodyController.text);
+          Get.back();
         },
         label: Text("Save"),
         icon: Icon(Icons.save),
       ),
     );
   }
+}
+
+void showEmptyTitleDialog(BuildContext context) {
+  print("in dialog ");
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        backgroundColor: Theme.of(context).backgroundColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(10.0),
+          ),
+        ),
+        title: Text(
+          "Title is empty!",
+          style: Theme.of(context).textTheme.bodyText2,
+        ),
+        content: Text('The title of the note cannot be empty.',
+            style: Theme.of(context).textTheme.bodyText1),
+        actions: <Widget>[
+          TextButton(
+            child: Text("Okay",
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText2
+                    .copyWith(color: Colors.purple)),
+            onPressed: () {},
+          ),
+        ],
+      );
+    },
+  );
 }

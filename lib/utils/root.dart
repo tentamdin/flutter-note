@@ -10,7 +10,7 @@ class Root extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () {
-        if (authController != null && authController.user != null) {
+        if (authController != null && authController.user?.uid != null) {
           return HomePage();
         } else {
           return Login();

@@ -13,12 +13,14 @@ class Themes {
         ),
     primaryColor: Colors.orange,
     accentColor: Colors.pink,
+    buttonColor: Colors.black,
   );
 
   final dartTheme = ThemeData.dark().copyWith(
     colorScheme: ColorScheme.light(),
     backgroundColor: Colors.grey.shade800,
     primaryColor: Colors.orange,
+    buttonColor: Colors.white,
     accentColor: Colors.pink,
     iconTheme: IconThemeData(
       color: Colors.white,

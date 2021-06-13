@@ -10,7 +10,6 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 
 class HomePage extends GetWidget<AuthController> {
   final AuthController authController = Get.find<AuthController>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 
 class CustomIconBtn extends StatelessWidget {
   final Color color;
@@ -9,8 +8,6 @@ class CustomIconBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var brightness = SchedulerBinding.instance.window.platformBrightness;
-    print("Brightness $brightness");
     return Container(
       decoration: BoxDecoration(
           color: color,
