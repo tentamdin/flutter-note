@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_note/controllers/authController.dart';
+import 'package:flutter_note/controllers/userController.dart';
 import 'package:flutter_note/screens/widgets/custom_icon_btn.dart';
 import 'package:get/get.dart';
 
 class Account extends StatelessWidget {
-  final AuthController authController = Get.find<AuthController>();
+  final UserController userController = Get.find<UserController>();
 
   @override
   Widget build(BuildContext context) {
@@ -53,23 +54,10 @@ class Account extends StatelessWidget {
                   text: TextSpan(
                     children: [
                       TextSpan(
-                        text: "Hi, Tamdin!\n",
+                        text: "Hi, ${userController.user.name} !\n",
                         style: TextStyle(
-                          color: Colors.black,
+                          color: Get.isDarkMode ? Colors.black : Colors.white,
                           fontSize: 18,
-                        ),
-                      ),
-                      WidgetSpan(
-                          child: Icon(
-                            Icons.phone,
-                            size: 14,
-                          ),
-                          alignment: PlaceholderAlignment.middle),
-                      TextSpan(
-                        text: "  +91 56745443433\n",
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 16,
                         ),
                       ),
                       WidgetSpan(
@@ -79,9 +67,9 @@ class Account extends StatelessWidget {
                           ),
                           alignment: PlaceholderAlignment.middle),
                       TextSpan(
-                        text: "   tamdin@gmail.com\n",
+                        text: "   ${userController.user.email}\n",
                         style: TextStyle(
-                          color: Colors.grey,
+                          color: Get.isDarkMode ? Colors.black : Colors.white,
                           fontSize: 16,
                         ),
                       ),
@@ -94,7 +82,7 @@ class Account extends StatelessWidget {
                   horizontal: 15,
                 ),
                 onTap: () {
-                  authController.signout();
+                  showSignOutDialog(context);
                 },
                 title: Text("Logout"),
                 leading: Icon(
@@ -108,4 +96,66 @@ class Account extends StatelessWidget {
       ),
     );
   }
+}
+
+void showSignOutDialog(BuildContext context) async {
+  final AuthController authController = Get.find<AuthController>();
+  print("in dialog ");
+  await showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        contentPadding: EdgeInsets.all(20),
+        actionsPadding: EdgeInsets.only(right: 60),
+        backgroundColor: Theme.of(context).backgroundColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(20.0),
+          ),
+        ),
+        title: Text(
+          "Are you sure you want to log out?",
+          style: TextStyle(
+            color: Theme.of(context).buttonColor,
+            fontSize: 20,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        content: Text(
+          'Your notes are already saved so when logging back your noteswill be there.',
+          style: Theme.of(context).textTheme.bodyText1,
+          textAlign: TextAlign.center,
+        ),
+        actions: <Widget>[
+          ElevatedButton(
+            child: Text("Log Out",
+                style: TextStyle(
+                  color: Theme.of(context).backgroundColor,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                )),
+            onPressed: () {
+              Get.back();
+              authController.signout();
+              Get.close(2);
+            },
+            style: ElevatedButton.styleFrom(
+              primary: Theme.of(context).buttonColor,
+            ),
+          ),
+          TextButton(
+            child: Text("Cancel",
+                style: TextStyle(
+                  color: Theme.of(context).buttonColor,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                )),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
 }

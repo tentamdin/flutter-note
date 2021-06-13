@@ -50,8 +50,7 @@ class ShowNote extends StatelessWidget {
                   CustomIconBtn(
                     color: Theme.of(context).backgroundColor,
                     onPressed: () {
-                      Database().delete(authController.user.uid, noteData.id);
-                      Get.back();
+                      showDeleteDialog(context, noteData);
                     },
                     icon: Icon(
                       Icons.delete,
@@ -131,4 +130,45 @@ class ShowNote extends StatelessWidget {
           : Container()),
     );
   }
+}
+
+void showDeleteDialog(BuildContext context, noteData) {
+  final AuthController authController = Get.find<AuthController>();
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10.0))),
+        title: Text(
+          "Delete Note?",
+          style: Theme.of(context).textTheme.headline6,
+        ),
+        content: Text("Are you sure you want to delete this note?",
+            style: Theme.of(context).textTheme.subtitle1),
+        actions: <Widget>[
+          TextButton(
+            child: Text(
+              "Yes",
+              style: Theme.of(context).textTheme.subtitle1,
+            ),
+            onPressed: () {
+              Get.back();
+              Database().delete(authController.user.uid, noteData.id);
+              Get.back(closeOverlays: true);
+            },
+          ),
+          TextButton(
+            child: Text(
+              "No",
+              style: Theme.of(context).textTheme.subtitle1,
+            ),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
 }

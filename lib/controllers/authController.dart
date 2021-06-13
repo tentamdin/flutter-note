@@ -73,7 +73,7 @@ class AuthController extends GetxController {
   void signout() async {
     try {
       await _auth.signOut();
-      Get.find<UserController>().clear();
+      Get.find<UserController>().user = UserModel();
     } catch (e) {
       Get.snackbar(
         'Error signing out',
