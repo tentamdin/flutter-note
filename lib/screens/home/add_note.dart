@@ -90,11 +90,14 @@ class AddNotePage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          titleController.text.length == 0 && bodyController.text.length == 0
-              ? showEmptyTitleDialog(context)
-              : Database().addNote(authController.user.uid,
-                  titleController.text, bodyController.text);
-          Get.back();
+          if (titleController.text.length == 0 &&
+              bodyController.text.length == 0) {
+            showEmptyTitleDialog(context);
+          } else {
+            Database().addNote(authController.user.uid, titleController.text,
+                bodyController.text);
+            Get.back();
+          }
         },
         label: Text("Save"),
         icon: Icon(Icons.save),
@@ -116,19 +119,22 @@ void showEmptyTitleDialog(BuildContext context) {
           ),
         ),
         title: Text(
-          "Title is empty!",
-          style: Theme.of(context).textTheme.bodyText2,
+          "Notes is empty!",
+          style: Theme.of(context).textTheme.headline6,
         ),
-        content: Text('The title of the note cannot be empty.',
-            style: Theme.of(context).textTheme.bodyText1),
+        content: Text(
+          'The content of the note cannot be empty to be saved.',
+          style: Theme.of(context).textTheme.subtitle1,
+        ),
         actions: <Widget>[
           TextButton(
-            child: Text("Okay",
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText2
-                    .copyWith(color: Colors.purple)),
-            onPressed: () {},
+            child: Text(
+              "Okay",
+              style: Theme.of(context).textTheme.subtitle1,
+            ),
+            onPressed: () {
+              Get.back();
+            },
           ),
         ],
       );
