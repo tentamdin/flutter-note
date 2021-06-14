@@ -12,7 +12,7 @@ class Themes {
         // backgroundColor: Colors.grey.shade300,
         ),
     primaryColor: Colors.orange,
-    accentColor: Colors.pink,
+    accentColor: Colors.tealAccent.shade700,
     buttonColor: Colors.black,
   );
 
@@ -21,7 +21,7 @@ class Themes {
     backgroundColor: Colors.grey.shade800,
     primaryColor: Colors.orange,
     buttonColor: Colors.white,
-    accentColor: Colors.pink,
+    accentColor: Colors.tealAccent,
     iconTheme: IconThemeData(
       color: Colors.white,
     ),
