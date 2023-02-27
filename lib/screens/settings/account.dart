@@ -27,7 +27,7 @@ class Account extends StatelessWidget {
                       icon: Icon(
                         Icons.arrow_back_ios,
                       ),
-                      color: Theme.of(context).backgroundColor,
+                      color: Theme.of(context).colorScheme.background,
                       onPressed: () {
                         Get.back();
                       },
@@ -56,7 +56,7 @@ class Account extends StatelessWidget {
                       TextSpan(
                         text: "Hi, ${userController.user.name} !\n",
                         style: TextStyle(
-                          color: Get.isDarkMode ? Colors.black : Colors.white,
+                          color: Get.isDarkMode ? Colors.white : Colors.black,
                           fontSize: 18,
                         ),
                       ),
@@ -69,7 +69,7 @@ class Account extends StatelessWidget {
                       TextSpan(
                         text: "   ${userController.user.email}\n",
                         style: TextStyle(
-                          color: Get.isDarkMode ? Colors.black : Colors.white,
+                          color: Get.isDarkMode ? Colors.white : Colors.black,
                           fontSize: 16,
                         ),
                       ),
@@ -107,7 +107,7 @@ void showSignOutDialog(BuildContext context) async {
       return AlertDialog(
         contentPadding: EdgeInsets.all(20),
         actionsPadding: EdgeInsets.only(right: 60),
-        backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor: Theme.of(context).colorScheme.background,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(20.0),
@@ -116,21 +116,21 @@ void showSignOutDialog(BuildContext context) async {
         title: Text(
           "Are you sure you want to log out?",
           style: TextStyle(
-            color: Theme.of(context).buttonColor,
+            color: Theme.of(context).colorScheme.onSurface,
             fontSize: 20,
           ),
           textAlign: TextAlign.center,
         ),
         content: Text(
           'Your notes are already saved so when logging back your noteswill be there.',
-          style: Theme.of(context).textTheme.bodyText1,
+          style: Theme.of(context).textTheme.bodyLarge,
           textAlign: TextAlign.center,
         ),
         actions: <Widget>[
           ElevatedButton(
             child: Text("Log Out",
                 style: TextStyle(
-                  color: Theme.of(context).backgroundColor,
+                  color: Theme.of(context).colorScheme.onSurface,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 )),
@@ -140,13 +140,13 @@ void showSignOutDialog(BuildContext context) async {
               Get.close(2);
             },
             style: ElevatedButton.styleFrom(
-              primary: Theme.of(context).buttonColor,
+              backgroundColor: Theme.of(context).colorScheme.background,
             ),
           ),
           TextButton(
             child: Text("Cancel",
                 style: TextStyle(
-                  color: Theme.of(context).buttonColor,
+                  color:Theme.of(context).colorScheme.onSurface,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 )),

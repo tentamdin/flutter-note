@@ -34,7 +34,7 @@ class ShowNote extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CustomIconBtn(
-                      color: Theme.of(context).backgroundColor,
+                      color: Theme.of(context).colorScheme.background,
                       onPressed: () {
                         Get.back();
                       },
@@ -43,7 +43,7 @@ class ShowNote extends StatelessWidget {
                       ),
                     ),
                     CustomIconBtn(
-                      color: Theme.of(context).backgroundColor,
+                      color: Theme.of(context).colorScheme.background,
                       onPressed: () {
                         showDeleteDialog(context, noteData);
                       },
@@ -127,15 +127,15 @@ void showDeleteDialog(BuildContext context, noteData) {
             borderRadius: BorderRadius.all(Radius.circular(10.0))),
         title: Text(
           "Delete Note?",
-          style: Theme.of(context).textTheme.headline6,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         content: Text("Are you sure you want to delete this note?",
-            style: Theme.of(context).textTheme.subtitle1),
+            style: Theme.of(context).textTheme.titleMedium),
         actions: <Widget>[
           TextButton(
             child: Text(
               "Yes",
-              style: Theme.of(context).textTheme.subtitle1,
+              style: Theme.of(context).textTheme.titleMedium,
             ),
             onPressed: () {
               Get.back();
@@ -146,7 +146,7 @@ void showDeleteDialog(BuildContext context, noteData) {
           TextButton(
             child: Text(
               "No",
-              style: Theme.of(context).textTheme.subtitle1,
+              style: Theme.of(context).textTheme.titleMedium,
             ),
             onPressed: () {
               Navigator.of(context).pop();
@@ -167,15 +167,15 @@ void showSameContentDialog(BuildContext context) {
             borderRadius: BorderRadius.all(Radius.circular(10.0))),
         title: Text(
           "No change in content!",
-          style: Theme.of(context).textTheme.headline6,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         content: Text("There is no change in content.",
-            style: Theme.of(context).textTheme.subtitle1),
+            style: Theme.of(context).textTheme.titleMedium),
         actions: <Widget>[
           TextButton(
             child: Text(
               "Okay",
-              style: Theme.of(context).textTheme.subtitle1,
+              style: Theme.of(context).textTheme.titleMedium,
             ),
             onPressed: () {
               Get.back();

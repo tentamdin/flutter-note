@@ -52,12 +52,12 @@ class Login extends StatelessWidget {
                             decoration: InputDecoration(
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Theme.of(context).buttonColor,
+                                    color: Theme.of(context).colorScheme.background,
                                   ),
                                 ),
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Theme.of(context).accentColor,
+                                    color: Theme.of(context).colorScheme.secondary,
                                   ),
                                 ),
                                 prefixIcon: Icon(
@@ -86,12 +86,12 @@ class Login extends StatelessWidget {
                                 ),
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Theme.of(context).buttonColor,
+                                    color: Theme.of(context).colorScheme.background,
                                   ),
                                 ),
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Theme.of(context).accentColor,
+                                    color: Theme.of(context).colorScheme.secondary,
                                   ),
                                 ),
                                 hintText: "PASSWORD"),

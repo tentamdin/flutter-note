@@ -6,7 +6,6 @@ import 'package:flutter_note/screens/home/note_list.dart';
 import 'package:flutter_note/screens/settings/setting.dart';
 import 'package:flutter_note/screens/widgets/custom_icon_btn.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 
 class HomePage extends GetWidget<AuthController> {
   final AuthController authController = Get.find<AuthController>();
@@ -26,7 +25,7 @@ class HomePage extends GetWidget<AuthController> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         CustomIconBtn(
-                          color: Theme.of(context).backgroundColor,
+                          color: Theme.of(context).colorScheme.background,
                           onPressed: () {
                             authController.axisCount.value =
                                 authController.axisCount.value == 2 ? 4 : 2;
@@ -43,7 +42,7 @@ class HomePage extends GetWidget<AuthController> {
                           ),
                         ),
                         CustomIconBtn(
-                          color: Theme.of(context).backgroundColor,
+                          color: Theme.of(context).colorScheme.background,
                           onPressed: () {
                             Get.to(() => Setting());
                           },

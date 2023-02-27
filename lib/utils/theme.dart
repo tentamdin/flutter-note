@@ -2,26 +2,32 @@ import 'package:flutter/material.dart';
 
 class Themes {
   final lightTheme = ThemeData.light().copyWith(
-    colorScheme: ColorScheme.dark(),
-    backgroundColor: Colors.grey.shade300,
+    colorScheme: ColorScheme.light(
+      background: Colors.grey.shade300,
+      secondary: Colors.tealAccent.shade700,
+    ),
+    primaryColor: Colors.orange,
     iconTheme: IconThemeData(
       color: Colors.black,
+    ),
+    buttonTheme: ButtonThemeData(
+      buttonColor: Colors.black,
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
         // foregroundColor: Colors.black,
         // backgroundColor: Colors.grey.shade300,
         ),
-    primaryColor: Colors.orange,
-    accentColor: Colors.tealAccent.shade700,
-    buttonColor: Colors.black,
   );
 
   final dartTheme = ThemeData.dark().copyWith(
-    colorScheme: ColorScheme.light(),
-    backgroundColor: Colors.grey.shade800,
+    colorScheme: ColorScheme.dark(
+      background: Colors.grey.shade800,
+      secondary: Colors.tealAccent,
+    ),
+    buttonTheme: ButtonThemeData(
+      buttonColor: Colors.white,
+    ),
     primaryColor: Colors.orange,
-    buttonColor: Colors.white,
-    accentColor: Colors.tealAccent,
     iconTheme: IconThemeData(
       color: Colors.white,
     ),

@@ -29,6 +29,13 @@
             {
               "client_id": "868884109886-hirofgah6hncidtaaqs9f615buc4sfaj.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "868884109886-badajmdp75k6f6tj73038e0qai436b5k.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutterNote"
+              }
             }
           ]
         }

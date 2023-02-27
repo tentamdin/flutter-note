@@ -25,7 +25,7 @@ class AddNotePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 CustomIconBtn(
-                  color: Theme.of(context).backgroundColor,
+                  color: Theme.of(context).colorScheme.background,
                   onPressed: () {
                     Get.back();
                   },
@@ -112,7 +112,7 @@ void showEmptyTitleDialog(BuildContext context) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor: Theme.of(context).colorScheme.background,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(10.0),
@@ -120,17 +120,17 @@ void showEmptyTitleDialog(BuildContext context) {
         ),
         title: Text(
           "Notes is empty!",
-          style: Theme.of(context).textTheme.headline6,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         content: Text(
           'The content of the note cannot be empty to be saved.',
-          style: Theme.of(context).textTheme.subtitle1,
+          style: Theme.of(context).textTheme.titleMedium,
         ),
         actions: <Widget>[
           TextButton(
             child: Text(
               "Okay",
-              style: Theme.of(context).textTheme.subtitle1,
+              style: Theme.of(context).textTheme.titleMedium,
             ),
             onPressed: () {
               Get.back();

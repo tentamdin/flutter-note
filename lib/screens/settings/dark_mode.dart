@@ -23,7 +23,7 @@ class DarkMode extends StatelessWidget {
                       icon: Icon(
                         Icons.arrow_back_ios,
                       ),
-                      color: Theme.of(context).backgroundColor,
+                      color: Theme.of(context).colorScheme.background,
                       onPressed: () {
                         Get.back();
                       },
