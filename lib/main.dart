@@ -5,10 +5,12 @@ import 'package:flutter_note/controllers/userController.dart';
 import 'package:flutter_note/utils/root.dart';
 import 'package:flutter_note/utils/theme.dart';
 import 'package:get/get.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp().then((value) {
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
+      .then((value) {
     Get.put<AuthController>(AuthController());
     Get.put<UserController>(UserController());
   });
